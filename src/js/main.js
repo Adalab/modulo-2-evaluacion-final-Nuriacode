@@ -1,3 +1,5 @@
 'use strict';
 
-console.log('>> Ready :)');
+//Obtener los datos del servidor
+//Pintar los datos del cóctel (imagen y nombre)
+
