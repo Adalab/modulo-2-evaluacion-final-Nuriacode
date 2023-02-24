@@ -13,16 +13,8 @@ const listCocktailFav = document.querySelector(".js_listFavorites"); //lista fav
 let listCocktailData = []; //array de cocteles
 let listFavCocktail = []; //array de cocteles favoritos
 
-//1-Llamada al servidor para que salga de primeras la lista de margaritas
-fetch(urlmargarita)
-  .then((response) => response.json())
-  .then((data) => {
-    console.log(data);
-    listCocktailData = data.drinks;
-    console.log(listCocktailData);
 
-    renderListCocktail(listCocktailData);
-  });
+
 
 //crear función pinta la lista de los cocteles
 const renderListCocktail = (listCocktailData) => {
@@ -34,7 +26,6 @@ const renderListCocktail = (listCocktailData) => {
 };
 
 //función pinta la lista de favoritos
-
 const renderFavListCocktail = (listFavCocktail) => {
   listCocktailFav.innerHTML = "";
   for (const item of listFavCocktail) {
@@ -80,6 +71,7 @@ btnSearch.addEventListener("click", handleClickSearch);
 //3- Favoritos: 3.1-seleccionar todos los elementos de la lista: añadir una clase en todos los li. 3.2-
 
 
+
 //función manejadora de eventToCocktail
 const handleClickCocktail = (ev) => {
     console.log("Me has seleccionado");
@@ -102,7 +94,11 @@ const handleClickCocktail = (ev) => {
      console.log(indexCocktailPost);
     //pintar la lista de favoritos con función renderFavListCocktail
     renderFavListCocktail(listFavCocktail);
+    //4Localstorage: qué voy a guardar y en qué momento. Guardar la lista de favoritos cuando se haga click en uno de los elementos. 
+    localStorage.setItem('Cocktail_favorito', JSON.stringify(listFavCocktail));
+    
   };
+
 
 
 //función que se ejecuta una vez cogidos los datos del servidor e incluye un evento click en cada coctel 
@@ -112,4 +108,23 @@ const eventToCocktail = () => {
   for (const item of liElementCocktail) {
     item.addEventListener("click", handleClickCocktail);
   }
+
 };
+
+
+//1-Llamada al servidor para que salga de primeras la lista de margaritas
+fetch(urlmargarita)
+  .then((response) => response.json())
+  .then((data) => {
+    console.log(data);
+    listCocktailData = data.drinks;
+    console.log(listCocktailData);
+
+    renderListCocktail(listCocktailData);
+    
+  });
+
+//localstorage
+const cocktailStoraged = JSON.parse(localStorage.getItem('Cocktail_favorito'));
+listFavCocktail=cocktailStoraged;
+renderFavListCocktail(listFavCocktail);
