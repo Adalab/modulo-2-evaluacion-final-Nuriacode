@@ -14,8 +14,6 @@ let listCocktailData = []; //array de cocteles
 let listFavCocktail = []; //array de cocteles favoritos
 
 
-
-
 //crear función pinta la lista de los cocteles
 const renderListCocktail = (listCocktailData) => {
   listCocktail.innerHTML = "";
@@ -27,11 +25,12 @@ const renderListCocktail = (listCocktailData) => {
 
 //función pinta la lista de favoritos
 const renderFavListCocktail = (listFavCocktail) => {
-  listCocktailFav.innerHTML = "";
+  listCocktailFav.innerHTML ='';
   for (const item of listFavCocktail) {
     listCocktailFav.innerHTML += renderCocktail(item);
   }
 };
+
 
 //función para pintar un cóctel
 const renderCocktail = (cocktail) => {
@@ -47,6 +46,11 @@ const renderCocktail = (cocktail) => {
   </li>`;
   return html;
 };
+
+//localstorage
+const cocktailStoraged = JSON.parse(localStorage.getItem('Cocktail_favorito'));
+listFavCocktail=cocktailStoraged;
+renderFavListCocktail(listFavCocktail);
 
 //función manejadora de click buscar
 const handleClickSearch = (ev) => {
@@ -71,7 +75,6 @@ btnSearch.addEventListener("click", handleClickSearch);
 //3- Favoritos: 3.1-seleccionar todos los elementos de la lista: añadir una clase en todos los li. 3.2-
 
 
-
 //función manejadora de eventToCocktail
 const handleClickCocktail = (ev) => {
     console.log("Me has seleccionado");
@@ -90,8 +93,6 @@ const handleClickCocktail = (ev) => {
     } else {
       listFavCocktail.splice(indexCocktail,1);
      }
-     const indexCocktailPost= listFavCocktail.findIndex(cocktail=>cocktail.idDrink===idSelected);
-     console.log(indexCocktailPost);
     //pintar la lista de favoritos con función renderFavListCocktail
     renderFavListCocktail(listFavCocktail);
     //4Localstorage: qué voy a guardar y en qué momento. Guardar la lista de favoritos cuando se haga click en uno de los elementos. 
@@ -124,7 +125,3 @@ fetch(urlmargarita)
     
   });
 
-//localstorage
-const cocktailStoraged = JSON.parse(localStorage.getItem('Cocktail_favorito'));
-listFavCocktail=cocktailStoraged;
-renderFavListCocktail(listFavCocktail);
