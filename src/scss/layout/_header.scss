@@ -1,0 +1,10 @@
+.header{
+    background-color: black;
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+    &--title{
+        text-align: center;
+        color: white;
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    }
+}

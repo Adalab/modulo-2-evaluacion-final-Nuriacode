@@ -1,17 +1,22 @@
-<main>
-  <form action="">
-    <input class="js_descSearch" type="text" placeholder="Escriba aquí el cocktail">
-    <input class="js_btnSearch" type="button" value="Buscar">
-    <input class="js_btnReset" type="button" value="Reset">
+<main class="main">
+  <section class="main__section">
+    <h2 class="main__section--title">Cocktail Drinks</h2>
+  <form class="main__section--form" action="">
+    <input class="main__section--form--input js_descSearch" type="text" placeholder="Escriba aquí">
+    <input class="main__section--form--search js_btnSearch" type="button" value="Buscar">
+    <input class="main__section--form--reset js_btnReset" type="button" value="Reset">
   </form>
-  <div>
-    <h2>Lista Cócteles</h2>
-    <ul class="js_listCocktail">
+  </section>
+  <div class="main__list">
+  <div class="main__list--listDrinks">
+    <h2 class="main__list--listDrinks--title">Lista de Cócteles</h2>
+    <ul class="main__list--listDrinks--list js_listCocktail">
     </ul>
   </div>
-  <div>
-    <h2>Favoritos</h2>
-    <ul class="js_listFavorites">
+  <div class="main__list--listFavDrinks">
+    <h2 class="main__list--listFavDrinks--title">Favoritos</h2>
+    <ul class="main__list--listFavDrinks--list js_listFavorites">
     </ul>
+  </div>
   </div>
 </main>

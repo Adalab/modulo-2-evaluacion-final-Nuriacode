@@ -13,6 +13,7 @@ const btnSearch = document.querySelector(".js_btnSearch"); //search button
 const Cocktails = document.querySelector(".js_listCocktail"); //cocktails list
 const favCocktail = document.querySelector(".js_listFavorites"); //Favorites cocktail list
 
+
 let listCocktailData = []; //cocktail array
 let listFavCocktailData = []; //favorites cocktail array
 
@@ -59,6 +60,7 @@ function renderCocktail (cocktail) {
   let html = "";
   html += `<li> 
   <article class="js_liElement" id="${cocktail.idDrink}">
+    <div class="collapsed">X</div>
     <img class="img" src="${cocktail.strDrinkThumb}" alt="Foto Cocktail ${cocktail.strDrink}"> 
     <h3>${cocktail.strDrink}</h3>
   </article>
