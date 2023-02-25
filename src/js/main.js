@@ -10,6 +10,7 @@ const urlmargarita = `https://www.thecocktaildb.com/api/json/v1/1/search.php?s=m
 const btnSearch = document.querySelector(".js_btnSearch"); //botón de buscar
 const listCocktail = document.querySelector(".js_listCocktail"); //lista de cocteles
 const listCocktailFav = document.querySelector(".js_listFavorites"); //lista favoritos
+
 let listCocktailData = []; //array de cocteles
 let listFavCocktail = []; //array de cocteles favoritos
 
@@ -31,7 +32,6 @@ const renderFavListCocktail = (listFavCocktail) => {
   }
 };
 
-
 //función para pintar un cóctel
 const renderCocktail = (cocktail) => {
   if (!cocktail.strDrinkThumb) {
@@ -51,6 +51,7 @@ const renderCocktail = (cocktail) => {
 const cocktailStoraged = JSON.parse(localStorage.getItem('Cocktail_favorito'));
 listFavCocktail=cocktailStoraged;
 renderFavListCocktail(listFavCocktail);
+
 
 //función manejadora de click buscar
 const handleClickSearch = (ev) => {
@@ -109,7 +110,6 @@ const eventToCocktail = () => {
   for (const item of liElementCocktail) {
     item.addEventListener("click", handleClickCocktail);
   }
-
 };
 
 
