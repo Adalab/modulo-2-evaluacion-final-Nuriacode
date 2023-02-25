@@ -10,7 +10,8 @@ const placeholder =
   "https://via.placeholder.com/210x295/ffffff/666666/?text=TV"; //img url of random image
 const urlCocktails = `https://www.thecocktaildb.com/api/json/v1/1/search.php?s=margarita`;
 const btnSearch = document.querySelector(".js_btnSearch"); //search button
-const Cocktails = document.querySelector(".js_listCocktail"); //cocktails list
+const btnReset = document.querySelector('.js_btnReset'); //reset button
+const cocktails = document.querySelector(".js_listCocktail"); //cocktails list
 const favCocktail = document.querySelector(".js_listFavorites"); //Favorites cocktail list
 
 
@@ -32,6 +33,8 @@ console.log(listFavCocktailData);
 console.log(cocktailStoraged);
 
 //1-Getting information of server. The information will show when user load the page. Each cocktail objets will be in cocktail array, (listCocktailData). Then, the function renderListCocktail, show the objetcs in the screen.
+initialFetch();
+function initialFetch(){
 fetch(urlCocktails)
   .then((response) => response.json())
   .then((data) => {
@@ -41,13 +44,13 @@ fetch(urlCocktails)
 
     renderListCocktail(listCocktailData);
     
-  });
+  })};
 
 //crear función pinta la lista de los cocteles
 function renderListCocktail (listCocktailData) {
-  Cocktails.innerHTML = "";
+  cocktails.innerHTML = "";
   for (const cocktail of listCocktailData) {
-    Cocktails.innerHTML += renderCocktail(cocktail);
+    cocktails.innerHTML += renderCocktail(cocktail);
   }
   eventToCocktail();
 };
@@ -137,3 +140,18 @@ const eventToCocktail = () => {
     item.addEventListener("click", handleClickCocktail);
   }
 };
+
+function handleClickReset (ev){
+  ev.preventDefault();
+  console.log('resetea');
+  input.innerHTML='';
+  cocktails.innerHTML='';
+  listFavCocktailData = [];
+  favCocktail.innerHTML='';
+  localStorage.removeItem(
+    "Cocktail");
+  
+  initialFetch();
+}
+
+btnReset.addEventListener('click', handleClickReset);
