@@ -60,7 +60,6 @@ function renderCocktail(cocktail) {
   let html = "";
   html += `<li> 
   <article class="js_liElement" id="${cocktail.idDrink}">
-    <div class="collapsed">X</div>
     <img class="img" src="${cocktail.strDrinkThumb}" alt="Foto Cocktail ${cocktail.strDrink}"> 
     <h3>${cocktail.strDrink}</h3>
   </article>
@@ -74,6 +73,7 @@ function renderFavListCocktail(listFavCocktail) {
   for (const item of listFavCocktail) {
     favCocktail.innerHTML += renderFavCocktail(item);
   }
+  eventoToFavCocktail ();
 }
 
 //función manejadora de click buscar
@@ -158,7 +158,7 @@ function renderFavCocktail(cocktail) {
   let html = "";
   html += `<li> 
   <article class="js_liElement" id="${cocktail.idDrink}">
-    <div class="js_removeFav">X</div>
+    <p class="remove js_removeFav" id="${cocktail.idDrink}">x</p>
     <img class="img" src="${cocktail.strDrinkThumb}" alt="Foto Cocktail ${cocktail.strDrink}"> 
     <h3>${cocktail.strDrink}</h3>
   </article>
@@ -166,9 +166,26 @@ function renderFavCocktail(cocktail) {
   return html;
 };
 
-const removeFav = document.querySelector('.js_removeFav');
+
+function eventoToFavCocktail (){
+  const removeFav = document.querySelectorAll('.js_removeFav');
+    for (const item of removeFav){
+      item.addEventListener('click', handeleClickRemoveFav);}
+}
+
 
 function handeleClickRemoveFav(ev){
-  console.log(ev.currentTarget.id)
+  console.log(ev.target.id);
+  const idFavSelected = ev.target.id;
+  const indexFavCocktail = listFavCocktailData.findIndex((favCocktail) => favCocktail.idDrink === idFavSelected);
+  console.log(indexFavCocktail);
+  if (!indexFavCocktail){
+    listFavCocktailData.splice(indexFavCocktail, 1);
+  }
+  localStorage.removeItem("Cocktail");
+  renderFavListCocktail(listFavCocktailData);
+  renderListCocktail(listCocktailData);
 }
-removeFav.addEventListener('click',handeleClickRemoveFav);
+
+
+
