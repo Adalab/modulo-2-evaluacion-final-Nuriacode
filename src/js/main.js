@@ -10,6 +10,7 @@ const btnReset = document.querySelector(".js_btnReset"); //reset button
 const textMsg = document.querySelector(".js_msg");
 const cocktails = document.querySelector(".js_listCocktail"); //cocktails list
 const favCocktail = document.querySelector(".js_listFavorites"); //Favorites cocktail list
+const logBtn = document.querySelector(".js_log");
 
 let listCocktailData = []; //cocktail array
 let listFavCocktailData = []; //favorites cocktail array
@@ -54,6 +55,10 @@ function renderListCocktail(listCocktailData) {
 
 //Function that render each object (cocktail) from the server.
 function renderCocktail(cocktail) {
+  let ingredientes = `${cocktail.strIngredient1}, ${cocktail.strIngredient2} y ${cocktail.strIngredient3}`;
+  if ( cocktail.strIngredient4){
+    ingredientes = `${cocktail.strIngredient1}, ${cocktail.strIngredient2}, ${cocktail.strIngredient3} y ${cocktail.strIngredient4}`;
+  }
   if (!cocktail.strDrinkThumb) {
     cocktail.strDrinkThumb = placeholder;
   }
@@ -62,8 +67,10 @@ function renderCocktail(cocktail) {
   <article class="article js_liElement" id="${cocktail.idDrink}">
     <img class="img" src="${cocktail.strDrinkThumb}" alt="Foto Cocktail ${cocktail.strDrink}"> 
     <h3>${cocktail.strDrink}</h3>
+    <p> Ingredientes: ${ingredientes}</p>
   </article>
   </li>`;
+
   return html;
 }
 
@@ -99,8 +106,6 @@ const handleClickSearch = (ev) => {
 
 //2- Event click on the search button.
 btnSearch.addEventListener("click", handleClickSearch);
-
-
 
 //eventToCocktail handler function
 const handleClickCocktail = (ev) => {
@@ -194,3 +199,10 @@ function handeleClickRemoveFav(ev) {
   renderFavListCocktail(listFavCocktailData);
   renderListCocktail(listCocktailData);
 }
+
+function handleclickLgBtn(ev) {
+  ev.preventDefault();
+  console.log(`Tienes:${listFavCocktailData.length} favoritos`);
+}
+
+logBtn.addEventListener("click", handleclickLgBtn);
